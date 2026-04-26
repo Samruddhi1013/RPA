@@ -114,7 +114,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message - Start Data Export" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[in_Config(&quot;LogMessage_DataExportStart&quot;) + &quot; &quot; + in_ExtractionResults.ResultsDocument.DocumentTypeId + &quot; (pag &quot; +  (in_ExtractionResults.ResultsDocument.Bounds.StartPage + 1).ToString + &quot;-&quot; + (in_ExtractionResults.ResultsDocument.Bounds.StartPage + in_ExtractionResults.ResultsDocument.Bounds.PageCount).ToString + &quot;)&quot; + Environment.NewLine + in_Config(&quot;logKey&quot;)]" />
     <ui:Comment DisplayName="Comment - Example Export" sap:VirtualizedContainerService.HintSize="450,166.66666666666666" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Please note that the below example is intended for illustrative purposes only. The export to excel was just an example. Ideally you would want to use the data extracted in another process." />
-    <Assign sap2010:Annotation.AnnotationText="Adding the page range here en sures a unique export name in c ase PD F sp  litting is DISABLED" DisplayName="Assign Output File Name" sap:VirtualizedContainerService.HintSize="450,221.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap2010:Annotation.AnnotationText="Adding the page range    here en sures a unique export name in c ase PD F sp  litting is DISABLED" DisplayName="Assign Output File Name" sap:VirtualizedContainerService.HintSize="450,221.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[outputPath]</OutArgument>
       </Assign.To>
