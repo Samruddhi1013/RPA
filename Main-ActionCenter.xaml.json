@@ -28,6 +28,30 @@
       "IsPrincipal": true,
       "ArgumentType": 0,
       "DataSourceItems": null
+    },
+    {
+      "Name": "io_Transactionitem",
+      "DisplayName": "io_Transactionitem",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "out_varOutputExcelPath",
+      "DisplayName": "out_varOutputExcelPath",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
     }
   ]
 }

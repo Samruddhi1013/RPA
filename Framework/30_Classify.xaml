@@ -1,5 +1,7 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="_30_Classify" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:p1="http://schemas.uipath.com/workflow/activities/document-processing-contracts/dom" xmlns:p2="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p3="http://schemas.uipath.com/workflow/activities/intelligentocr/classification" xmlns:p4="http://schemas.uipath.com/workflow/activities/document-processing-contracts/classification" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
+    <x:Property Name="argument1" Type="InArgument(x:String)" />
+    <x:Property Name="io_Trnasactionitem" Type="InOutArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="The file path of the target document that is going to be processed." Name="in_TargetDocument" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Stores the project taxonomy against which the documents can be processed." Name="in_DocTaxonomy" Type="InArgument(p:DocumentTaxonomy)" />
     <x:Property sap2010:Annotation.AnnotationText="The Document Object Model (DOM) of the target document." Name="in_DOM" Type="InArgument(p1:Document)" />
@@ -110,7 +112,7 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Classification workflow. Classifiers are  process-dependant!&#xA;&#xA;Outputs whether the document was successfully classified or not." DisplayName="Classify" sap:VirtualizedContainerService.HintSize="826.6666666666666,1413.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Classification workflow. Classifiers are  process-dependant!&#xA;&#xA;Outputs whether the document was successfully classified or not." DisplayName="Classify" sap:VirtualizedContainerService.HintSize="576.6666666666666,1413.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>

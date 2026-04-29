@@ -1,0 +1,569 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ExcelHelper_CreateOutputFile" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="out_ExcelFilePath" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ExcelHelper_CreateOutputFile_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Enums</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Files.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Models</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Excel</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Excel.Enums</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentUnderstanding.ML.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Excel Helper Create Output File-Creates one Excel output file per robot run. All 15 variant sheets and Status sheet are created here with headers. Invoked once from 10_InitializeProcess.xaml" DisplayName="ExcelHelper_CreateOutputFile" sap:VirtualizedContainerService.HintSize="922,2935.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="var_ColName" />
+      <Variable x:TypeArguments="x:String" Name="var_CurrentVariant" />
+      <Variable x:TypeArguments="x:String" Name="var_SheetNameTrimmed" />
+      <Variable x:TypeArguments="s:String[]" Name="var_StatusHeadersList" />
+      <Variable x:TypeArguments="s:String[]" Name="var_VariantHeadersList" />
+      <Variable x:TypeArguments="s:String[]" Name="var_VariantNamesList" />
+      <Variable x:TypeArguments="x:String" Name="var_RunTimestamp" />
+      <Variable x:TypeArguments="sd:DataTable" Name="var_VariantHeadersDt" />
+      <Variable x:TypeArguments="sd:DataTable" Name="var_StatusHeadersDT" />
+      <Variable x:TypeArguments="x:String" Name="var_ColName1" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="ExcelHelper_CreateOutputFile started" sap:VirtualizedContainerService.HintSize="588,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ExcelHelper_CreateOutputFile started &quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;)]" />
+    <Assign sap2010:Annotation.AnnotationText="Unique timestamp appended to filename so each robot run creates a new Excel file" DisplayName="Assign-Generate Run Timestamp" sap:VirtualizedContainerService.HintSize="588,221.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[var_RunTimestamp]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("yyyyMMdd_HHmmss")]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <Assign sap2010:Annotation.AnnotationText="create full path to store output in excel" DisplayName="Assign-Build Full Output Excel File Path" sap:VirtualizedContainerService.HintSize="588,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_ExcelFilePath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[System.IO.Path.Combine(in_Config("OutputFolderPath").ToString(), in_Config("ExcelFileName").ToString() + "_" + var_RunTimestamp + ".xlsx")]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,272" sap2010:WorkflowViewState.IdRef="Sequence_14">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap2010:Annotation.AnnotationText="Passing created file path back to caller so 10_InitializeProcess stores it in Config dictionary" DisplayName="Assign-Set Out Argument Excel File Path" sap:VirtualizedContainerService.HintSize="416,212" sap2010:WorkflowViewState.IdRef="Assign_13">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[out_ExcelFilePath]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[var_ExcelFilePath]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_15">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign-Split Variant Headers String to List" sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:String[]">[var_VariantHeadersList]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:String[]">[in_Config("VariantSheetHeaders").ToString().Split(","c).ToArray()]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_7">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_16">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign-Split Status Headers String to List" sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:String[]">[var_StatusHeadersList]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:String[]">[in_Config("StatusSheetHeaders").ToString().Split(","c).ToArray()]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <Assign sap2010:Annotation.AnnotationText="Reading all 15 variant folder names from Config" DisplayName="Assign-Split Variant Names String to List" sap:VirtualizedContainerService.HintSize="588,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_10">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[var_VariantNamesList]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[in_Config("VariantNames").ToString.Split(","c).ToArray()]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[var_VariantHeadersDt]" DisplayName="Generate Data Table From Text" sap:VirtualizedContainerService.HintSize="588,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[in_Config(&quot;VariantSheetHeaders&quot;).ToString()]" />
+    <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[var_StatusHeadersDT]" DisplayName="Generate Data Table From Text" sap:VirtualizedContainerService.HintSize="588,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_2" Input="[in_Config(&quot;StatusSheetHeaders&quot;).ToString()]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_8">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_17">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign-Initialize Variant Headers DataTable" sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_5">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[var_VariantHeadersDt]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[New DataTable]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[in_Config(&quot;VariantSheetHeaders&quot;).ToString.Split(&quot;,&quot;c)]" DataTable="[var_VariantHeadersDt]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_18">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign-Initialize Variant Headers DataTable" sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_12">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[var_StatusHeadersDT]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[New DataTable]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_10">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,680" sap2010:WorkflowViewState.IdRef="Sequence_19">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each headers" sap:VirtualizedContainerService.HintSize="452,620" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[var_VariantHeadersList]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="headers" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,497.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[headers.Trim]" DataTable="[var_VariantHeadersDt]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="416,223.33333333333334" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_3" />
+                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[var_VariantHeadersList]" DataTable="[var_VariantHeadersDt]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_11">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,680" sap2010:WorkflowViewState.IdRef="Sequence_20">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="452,620" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[var_StatusHeadersList]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,497.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[currentText.Trim]" DataTable="[var_StatusHeadersDT]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="416,223.33333333333334" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_5" />
+                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[var_StatusHeadersList]" DataTable="[var_StatusHeadersDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[in_Config(&quot;StatusSheetHeaders&quot;).ToString.Split(&quot;,&quot;c)]" DataTable="[var_StatusHeadersDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,487.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="each comma separated value becomes one column in the DataTable" DisplayName="For Each-Add Variant Header Columns to DT" sap:VirtualizedContainerService.HintSize="452,427.3333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[var_VariantHeadersList]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="var_ColName" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[var_ColName.Trim]" DataTable="[var_VariantHeadersDt]" DisplayName="Add Data Column-Add Header Column to Variant DT" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEach>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,456.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each-Add Status Header Columns to DT" sap:VirtualizedContainerService.HintSize="452,396.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[var_StatusHeadersList]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[var_ColName1]" DataTable="[var_StatusHeadersDT]" DisplayName="Add Data Column-Add Column to Status Headers DT" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:ExcelApplicationScope Password="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="588,785.3333333333334" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" SensitivityOperation="None" WorkbookPath="[out_ExcelFilePath]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="554,643.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope-Create Output File With All Sheets" sap:VirtualizedContainerService.HintSize="520,583.3333333333334" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" ProcessMode="AlwaysCreateNew">
+              <ueab:ExcelProcessScopeX.Body>
+                <ActivityAction x:TypeArguments="ui:IExcelProcess">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,473.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each-Create Each Variant Sheet With Headers" sap:VirtualizedContainerService.HintSize="452,302.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[var_VariantNamesList]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:String">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:String" Name="var_CurrentVariant" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,170.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:String" Name="variable1" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ExcelWriteRange AddHeaders="False" DataTable="[var_VariantHeadersDt]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="416,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="[var_CurrentVariant.Trim]" StartingCell="A1" />
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                    <ui:ExcelWriteRange AddHeaders="False" DataTable="[var_StatusHeadersDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="452,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="[in_Config(&quot;StatusSheetName&quot;).ToString]" StartingCell="A1" />
+                  </Sequence>
+                </ActivityAction>
+              </ueab:ExcelProcessScopeX.Body>
+            </ueab:ExcelProcessScopeX>
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="588,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;output file creation workflow ended and Output Excel file created successfully at: &quot;+ out_ExcelFilePath]" />
+  </Sequence>
+</Activity>

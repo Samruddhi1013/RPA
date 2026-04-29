@@ -3,8 +3,9 @@
     <x:Property sap2010:Annotation.AnnotationText="Used to control the number of attempts of retrying in case of a system exception." Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the amount of time between retries in the Retry Scope activity." Name="in_RetryInterval" Type="InArgument(x:TimeSpan)" />
     <x:Property sap2010:Annotation.AnnotationText="The file path of the target document that is going to be processed." Name="out_TargetFile" Type="OutArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="Stores the transaction item to be updated in the Orchestrator Queue." Name="out_TransactionItem" Type="OutArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Stores the transaction item to be updated in the Orchestrator Queue." Name="inout_TransactionItem" Type="InOutArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property sap2010:Annotation.AnnotationText="Stores the transaction item to be updated in the Orchestrator Queue." Name="out_TransactionItem" Type="OutArgument(ui:QueueItem)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -151,7 +152,7 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:GetQueueItem sap2010:Annotation.AnnotationText="Get a transaction item from the specified Orchestrator queue.&#xA;&#xA;The file to be processed is expected to be found under the &quot;TargetFile&quot; key of the transaction item." ContinueOnError="False" DisplayName="Get Item to be Processed" FolderPath="[io_Config(&quot;DocumentUnderstandingQueuePath&quot;)]" sap:VirtualizedContainerService.HintSize="416,261.3333333333333" sap2010:WorkflowViewState.IdRef="GetQueueItem_3" QueueType="[io_Config(&quot;DocumentUnderstandingQueueName&quot;)]" TransactionItem="[out_TransactionItem]">
+                <ui:GetQueueItem sap2010:Annotation.AnnotationText="Get a transaction item from the specified Orchestrator queue.&#xA;&#xA;The file to be processed is expected to be found under the &quot;TargetFile&quot; key of the transaction item." ContinueOnError="False" DisplayName="Get Item to be Processed" FolderPath="[io_Config(&quot;DocumentUnderstandingQueuePath&quot;)]" sap:VirtualizedContainerService.HintSize="416,261.3333333333333" sap2010:WorkflowViewState.IdRef="GetQueueItem_3" QueueType="[io_Config(&quot;DocumentUnderstandingQueueName&quot;)]" TransactionItem="[inout_TransactionItem]">
                   <ui:GetQueueItem.Reference>
                     <InArgument x:TypeArguments="x:String" />
                   </ui:GetQueueItem.Reference>
@@ -231,12 +232,12 @@
         </Assign>
       </Sequence>
     </utam:MockActivity>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="722,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_32" Level="Info" Message="[String.Join(&quot;,&quot;, out_TransactionItem.SpecificContent.Keys)]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="722,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_32" Level="Info" Message="[String.Join(&quot;,&quot;, inout_TransactionItem.SpecificContent.Keys)]" />
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="722,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_33" Level="Info" Message="[io_Config(&quot;TargetFileKey&quot;).ToString]" />
     <ui:IfElseIf sap2010:Annotation.AnnotationText="There is an issue with the Else-If activity where subsequent conditions are checked. Thus the double-check whether the Transaction Item is Nothing" DisplayName="Else If - Transaction Item &amp; Target File Check" sap:VirtualizedContainerService.HintSize="722,1463.3333333333333" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
       <ui:IfElseIf.ConditionBlocks>
         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[out_TransactionItem Is Nothing]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_1">
+          <ui:IfElseIfBlock BlockType="If" Condition="[inout_TransactionItem Is Nothing]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_1">
             <ui:IfElseIfBlock.Then>
               <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="670.6666666666666,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_65">
                 <sap:WorkflowViewStateService.ViewState>
@@ -248,7 +249,7 @@
               </Sequence>
             </ui:IfElseIfBlock.Then>
           </ui:IfElseIfBlock>
-          <ui:IfElseIfBlock BlockType="ElseIf" Condition="[out_TransactionItem IsNot Nothing AndAlso not out_TransactionItem.SpecificContent.Keys.Contains(io_Config(&quot;TargetFileKey&quot;))]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_2">
+          <ui:IfElseIfBlock BlockType="ElseIf" Condition="[inout_TransactionItem IsNot Nothing AndAlso not inout_TransactionItem.SpecificContent.Keys.Contains(io_Config(&quot;TargetFileKey&quot;))]" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_2">
             <ui:IfElseIfBlock.Then>
               <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="670.6666666666666,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_70">
                 <sap:WorkflowViewStateService.ViewState>
@@ -273,10 +274,10 @@
                     <OutArgument x:TypeArguments="x:String">[out_TargetFile]</OutArgument>
                   </Assign.To>
                   <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">[out_TransactionItem.SpecificContent(io_Config("TargetFileKey")).ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[inout_TransactionItem.SpecificContent(io_Config("TargetFileKey")).ToString]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each - Copy SpecificContent to Config " sap:VirtualizedContainerService.HintSize="636.6666666666666,337.3333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[out_TransactionItem.SpecificContent.Keys]">
+                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each - Copy SpecificContent to Config " sap:VirtualizedContainerService.HintSize="636.6666666666666,337.3333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[inout_TransactionItem.SpecificContent.Keys]">
                   <ui:ForEach.Body>
                     <ActivityAction x:TypeArguments="x:String">
                       <ActivityAction.Argument>
@@ -287,7 +288,7 @@
                           <OutArgument x:TypeArguments="x:String">[io_Config(key)]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">[out_TransactionItem.SpecificContent(key).ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String">[inout_TransactionItem.SpecificContent(key).ToString]</InArgument>
                         </Assign.Value>
                       </Assign>
                     </ActivityAction>

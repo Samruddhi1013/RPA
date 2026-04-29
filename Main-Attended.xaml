@@ -235,7 +235,7 @@
                         <InArgument x:TypeArguments="x:Int32" x:Key="in_MaxAttempts">[maxAttempts]</InArgument>
                         <InArgument x:TypeArguments="x:TimeSpan" x:Key="in_RetryInterval">[retryInterval]</InArgument>
                         <OutArgument x:TypeArguments="x:String" x:Key="out_TargetFile">[in_TargetFile]</OutArgument>
-                        <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_TransactionItem">[TransactionItem]</OutArgument>
+                        <OutArgument x:TypeArguments="ui:QueueItem" x:Key="inout_TransactionItem">[TransactionItem]</OutArgument>
                         <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_Config">[config]</InOutArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                       <sap:WorkflowViewStateService.ViewState>

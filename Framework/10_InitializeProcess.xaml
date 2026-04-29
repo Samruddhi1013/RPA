@@ -1,5 +1,6 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="_10_InitializeProcess" this:_10_InitializeProcess.in_AssetsSheet="Assets" this:_10_InitializeProcess.in_ConfigFile="Data\Config.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
+    <x:Property Name="out_ExcelPath" Type="InOutArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Name of the sheet corresponding to assets in the configuration file." Name="in_AssetsSheet" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Path to the configuration file that defines settings, constants and assets." Name="in_ConfigFile" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the number of attempts of retrying in case of a system exception." Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
@@ -103,15 +104,15 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow loads the Taxonomy and updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="InitializeProcess" sap:VirtualizedContainerService.HintSize="1030.6666666666665,2740.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow loads the Taxonomy and updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="InitializeProcess" sap:VirtualizedContainerService.HintSize="922,2914.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - InitStarted" sap:VirtualizedContainerService.HintSize="558,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[io_Config(&quot;LogMessage_InitStarted&quot;) + Environment.NewLine + io_Config(&quot;logKey&quot;)]" />
-    <ui:RetryScope sap2010:Annotation.AnnotationText="Although unusual, the connection to the Orchestrator might time-out. The retry mechanism is used to compensate for minor fluctuatios in network stability and other recoverable issues." ContinueOnError="False" DisplayName="Retry Scope - InitializeProcess" sap:VirtualizedContainerService.HintSize="558,2510.6666666666665" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[in_MaxAttempts]" RetryInterval="[in_RetryInterval]">
+    <ui:LogMessage DisplayName="Log Message - InitStarted" sap:VirtualizedContainerService.HintSize="518,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[io_Config(&quot;LogMessage_InitStarted&quot;) + Environment.NewLine + io_Config(&quot;logKey&quot;)]" />
+    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" sap2010:Annotation.AnnotationText="Although unusual, the connection to the Orchestrator might time-out. The retry mechanism is used to compensate for minor fluctuatios in network stability and other recoverable issues." ContinueOnError="False" DisplayName="Retry Scope - InitializeProcess" sap:VirtualizedContainerService.HintSize="518,2516.6666666666665" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[in_MaxAttempts]" RetryInterval="[in_RetryInterval]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
           <Sequence sap2010:Annotation.AnnotationText="This sequence loads the Taxonomy &amp; updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="LoadAllSettings" sap:VirtualizedContainerService.HintSize="516,2248" sap2010:WorkflowViewState.IdRef="Sequence_4">
@@ -244,5 +245,11 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="CreateOutputFile - Invoke Workflow File (ConocoProject_workflows\CreateOutputFile.xaml)" sap:VirtualizedContainerService.HintSize="518,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ConocoProject_workflows\CreateOutputFile.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Config">[io_Config]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="out_ExcelFilePath">[out_ExcelPath]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
