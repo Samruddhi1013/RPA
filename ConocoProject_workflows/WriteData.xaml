@@ -48,6 +48,8 @@
       <x:String>UiPath.Excel.Activities.Business</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -110,9 +112,10 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ExcelHelper_WriteData" sap:VirtualizedContainerService.HintSize="710,1564.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ExcelHelper_WriteData" sap:VirtualizedContainerService.HintSize="652,1583.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataSet" Name="var_ExportDataset" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Outputdatatable" />
@@ -124,7 +127,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="477.3333333333333,180" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="520,180" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -140,20 +143,20 @@
               <OutArgument x:TypeArguments="x:String">[var_MatchedSheet]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[var_VariantNamesList.FirstOrDefault(Function(v) in_strFilePath.ToLower.Contains(v.Trim.ToLower))]</InArgument>
+              <InArgument x:TypeArguments="x:String">[var_VariantNamesList.FirstOrDefault(Function(v) in_strOutputFilePath.ToLower.Contains(v.Trim.ToLower))]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <p1:ExportExtractionResults sap2010:Annotation.AnnotationText="in_ExtractionResults.AsDataSet() method can also be used" DataSet="[var_ExportDataset]" DisplayName="Export Extraction Results - Export" ExtractionResult="[in_ErExtractionResults]" sap:VirtualizedContainerService.HintSize="477.3333333333333,258.6666666666667" sap2010:WorkflowViewState.IdRef="ExportExtractionResults_1" IncludeConfidence="False" IncludeOCRConfidence="False">
+    <p1:ExportExtractionResults sap2010:Annotation.AnnotationText="in_ExtractionResults.AsDataSet() method can also be used" DataSet="[var_ExportDataset]" DisplayName="Export Extraction Results - Export" ExtractionResult="[in_ErExtractionResults]" sap:VirtualizedContainerService.HintSize="520,258.6666666666667" sap2010:WorkflowViewState.IdRef="ExportExtractionResults_1" IncludeConfidence="False" IncludeOCRConfidence="False">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </p1:ExportExtractionResults>
-    <Assign sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="520,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dt_Outputdatatable]</OutArgument>
       </Assign.To>
@@ -161,18 +164,38 @@
         <InArgument x:TypeArguments="sd:DataTable">[var_ExportDataset.Tables(0)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;data is appending&quot;]" />
-    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" AppliesTo="All" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="EXCEL" />
-    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="477.3333333333333,406" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="2" RetryInterval="00:00:05">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;data is appending&quot;]" />
+    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="520,601.3333333333334" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="2" RetryInterval="00:00:05">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="450,198.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="518,394" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[dt_Outputdatatable]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="416,138.66666666666666" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="[var_MatchedSheet]" WorkbookPath="[in_strOutputFilePath]" />
+            <ui:ExcelApplicationScope Password="{x:Null}" SensitivityLabel="{x:Null}" sap2010:Annotation.AnnotationText="storing actual data to excel" CreateNewFile="False" DisplayName="Opens an Excel workbook and appends a data table to a sheet" sap:VirtualizedContainerService.HintSize="484,334" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" InstanceCachePeriod="3000" SensitivityOperation="None" WorkbookPath="[in_strOutputFilePath]">
+              <ui:ExcelApplicationScope.Body>
+                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,170.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExcelAppendRange DataTable="[dt_Outputdatatable]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="416,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_2" SheetName="[var_MatchedSheet]" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ExcelApplicationScope.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ExcelApplicationScope>
           </Sequence>
         </ActivityAction>
       </ui:RetryScope.ActivityBody>
@@ -180,6 +203,6 @@
         <ActivityFunc x:TypeArguments="x:Boolean" />
       </ui:RetryScope.Condition>
     </ui:RetryScope>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="477.3333333333333,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;data append&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="520,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;data append&quot;]" />
   </Sequence>
 </Activity>

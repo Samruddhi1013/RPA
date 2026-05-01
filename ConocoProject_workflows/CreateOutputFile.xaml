@@ -141,7 +141,7 @@
       <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Excel Helper Create Output File-Creates one Excel output file per robot run. All 15 variant sheets and Status sheet are created here with headers. Invoked once from 10_InitializeProcess.xaml" DisplayName="ExcelHelper_CreateOutputFile" sap:VirtualizedContainerService.HintSize="922,2935.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Excel Helper Create Output File-Creates one Excel output file per robot run. All 15 variant sheets and Status sheet are created here with headers. Invoked once from 10_InitializeProcess.xaml" DisplayName="ExcelHelper_CreateOutputFile" sap:VirtualizedContainerService.HintSize="938,3370" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="var_ColName" />
       <Variable x:TypeArguments="x:String" Name="var_CurrentVariant" />
@@ -160,13 +160,13 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="ExcelHelper_CreateOutputFile started" sap:VirtualizedContainerService.HintSize="588,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ExcelHelper_CreateOutputFile started &quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;)]" />
-    <Assign sap2010:Annotation.AnnotationText="Unique timestamp appended to filename so each robot run creates a new Excel file" DisplayName="Assign-Generate Run Timestamp" sap:VirtualizedContainerService.HintSize="588,221.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:LogMessage DisplayName="ExcelHelper_CreateOutputFile started" sap:VirtualizedContainerService.HintSize="624,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ExcelHelper_CreateOutputFile started &quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;)]" />
+    <Assign sap2010:Annotation.AnnotationText="Unique timestamp appended to filename so each robot run creates a new Excel file" DisplayName="Assign-Generate Run Timestamp" sap:VirtualizedContainerService.HintSize="624,221.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[var_RunTimestamp]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("yyyyMMdd_HHmmss")]</InArgument>
+        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("yyyyMMdd")]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -174,7 +174,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <Assign sap2010:Annotation.AnnotationText="create full path to store output in excel" DisplayName="Assign-Build Full Output Excel File Path" sap:VirtualizedContainerService.HintSize="588,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap2010:Annotation.AnnotationText="create full path to store output in excel" DisplayName="Assign-Build Full Output Excel File Path" sap:VirtualizedContainerService.HintSize="624,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_ExcelFilePath]</OutArgument>
       </Assign.To>
@@ -187,7 +187,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_5">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,272" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
@@ -217,7 +217,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_6">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_15">
           <sap:WorkflowViewStateService.ViewState>
@@ -242,7 +242,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_7">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_7">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_16">
           <sap:WorkflowViewStateService.ViewState>
@@ -267,7 +267,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <Assign sap2010:Annotation.AnnotationText="Reading all 15 variant folder names from Config" DisplayName="Assign-Split Variant Names String to List" sap:VirtualizedContainerService.HintSize="588,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_10">
+    <Assign sap2010:Annotation.AnnotationText="Reading all 15 variant folder names from Config" DisplayName="Assign-Split Variant Names String to List" sap:VirtualizedContainerService.HintSize="624,207.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_10">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[var_VariantNamesList]</OutArgument>
       </Assign.To>
@@ -280,9 +280,9 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[var_VariantHeadersDt]" DisplayName="Generate Data Table From Text" sap:VirtualizedContainerService.HintSize="588,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[in_Config(&quot;VariantSheetHeaders&quot;).ToString()]" />
-    <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[var_StatusHeadersDT]" DisplayName="Generate Data Table From Text" sap:VirtualizedContainerService.HintSize="588,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_2" Input="[in_Config(&quot;StatusSheetHeaders&quot;).ToString()]" />
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_8">
+    <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[var_VariantHeadersDt]" DisplayName="Generate Data Table From Text" sap:VirtualizedContainerService.HintSize="624,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[in_Config(&quot;VariantSheetHeaders&quot;).ToString()]" />
+    <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="False" ColumnSeparators="," DataTable="[var_StatusHeadersDT]" DisplayName="Generate Data Table From Text" sap:VirtualizedContainerService.HintSize="624,236" sap2010:WorkflowViewState.IdRef="GenerateDataTable_2" Input="[in_Config(&quot;StatusSheetHeaders&quot;).ToString()]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_8">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_17">
           <sap:WorkflowViewStateService.ViewState>
@@ -307,7 +307,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_3">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_9">
           <sap:WorkflowViewStateService.ViewState>
@@ -325,7 +325,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_9">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_18">
           <sap:WorkflowViewStateService.ViewState>
@@ -350,7 +350,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_10">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_10">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,680" sap2010:WorkflowViewState.IdRef="Sequence_19">
           <sap:WorkflowViewStateService.ViewState>
@@ -385,7 +385,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_11">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_11">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,680" sap2010:WorkflowViewState.IdRef="Sequence_20">
           <sap:WorkflowViewStateService.ViewState>
@@ -420,7 +420,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_4">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_11">
           <sap:WorkflowViewStateService.ViewState>
@@ -438,7 +438,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,487.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
@@ -477,7 +477,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="588,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,456.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
@@ -511,59 +511,76 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:ExcelApplicationScope Password="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="588,785.3333333333334" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" SensitivityOperation="None" WorkbookPath="[out_ExcelFilePath]">
-      <ui:ExcelApplicationScope.Body>
-        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="554,643.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" AppliesTo="All" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="624,176.66666666666666" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="EXCEL" />
+    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="624,1043.3333333333333" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="2" RetryInterval="00:00:05">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="622,836" sap2010:WorkflowViewState.IdRef="Sequence_21">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope-Create Output File With All Sheets" sap:VirtualizedContainerService.HintSize="520,583.3333333333334" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" ProcessMode="AlwaysCreateNew">
-              <ueab:ExcelProcessScopeX.Body>
-                <ActivityAction x:TypeArguments="ui:IExcelProcess">
+            <ui:ExcelApplicationScope Password="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="588,776" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="0" SensitivityOperation="None" WorkbookPath="[out_ExcelFilePath]">
+              <ui:ExcelApplicationScope.Body>
+                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                   <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,473.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="554,643.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_6">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each-Create Each Variant Sheet With Headers" sap:VirtualizedContainerService.HintSize="452,302.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[var_VariantNamesList]">
-                      <ui:ForEach.Body>
-                        <ActivityAction x:TypeArguments="x:String">
+                    <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope-Create Output File With All Sheets" sap:VirtualizedContainerService.HintSize="520,583.3333333333334" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" ProcessMode="AlwaysCreateNew">
+                      <ueab:ExcelProcessScopeX.Body>
+                        <ActivityAction x:TypeArguments="ui:IExcelProcess">
                           <ActivityAction.Argument>
-                            <DelegateInArgument x:TypeArguments="x:String" Name="var_CurrentVariant" />
+                            <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
                           </ActivityAction.Argument>
-                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,170.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                            <Sequence.Variables>
-                              <Variable x:TypeArguments="x:String" Name="variable1" />
-                            </Sequence.Variables>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,473.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:ExcelWriteRange AddHeaders="False" DataTable="[var_VariantHeadersDt]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="416,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="[var_CurrentVariant.Trim]" StartingCell="A1" />
+                            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each-Create Each Variant Sheet With Headers" sap:VirtualizedContainerService.HintSize="452,302.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[var_VariantNamesList]">
+                              <ui:ForEach.Body>
+                                <ActivityAction x:TypeArguments="x:String">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:String" Name="var_CurrentVariant" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,170.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="variable1" />
+                                    </Sequence.Variables>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExcelWriteRange AddHeaders="False" DataTable="[var_VariantHeadersDt]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="416,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="[var_CurrentVariant.Trim]" StartingCell="A1" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEach.Body>
+                            </ui:ForEach>
+                            <ui:ExcelWriteRange AddHeaders="False" DataTable="[var_StatusHeadersDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="452,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="[in_Config(&quot;StatusSheetName&quot;).ToString]" StartingCell="A1" />
                           </Sequence>
                         </ActivityAction>
-                      </ui:ForEach.Body>
-                    </ui:ForEach>
-                    <ui:ExcelWriteRange AddHeaders="False" DataTable="[var_StatusHeadersDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="452,110.66666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="[in_Config(&quot;StatusSheetName&quot;).ToString]" StartingCell="A1" />
+                      </ueab:ExcelProcessScopeX.Body>
+                    </ueab:ExcelProcessScopeX>
                   </Sequence>
                 </ActivityAction>
-              </ueab:ExcelProcessScopeX.Body>
-            </ueab:ExcelProcessScopeX>
+              </ui:ExcelApplicationScope.Body>
+            </ui:ExcelApplicationScope>
           </Sequence>
         </ActivityAction>
-      </ui:ExcelApplicationScope.Body>
-    </ui:ExcelApplicationScope>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="588,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;output file creation workflow ended and Output Excel file created successfully at: &quot;+ out_ExcelFilePath]" />
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean" />
+      </ui:RetryScope.Condition>
+    </ui:RetryScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="624,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;output file creation workflow ended and Output Excel file created successfully at: &quot;+ out_ExcelFilePath]" />
   </Sequence>
 </Activity>

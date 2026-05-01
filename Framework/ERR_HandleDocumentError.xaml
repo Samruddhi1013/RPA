@@ -101,7 +101,7 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow executes when an exception occurs when processing a classified document.&#xA;&#xA;Any error cleanup should be done here.&#xA;&#xA;NOTE: By default, all exceptions are treated the same. " DisplayName="ERR_HandleDocumentError" sap:VirtualizedContainerService.HintSize="708.6666666666666,444.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow executes when an exception occurs when processing a classified document.&#xA;&#xA;Any error cleanup should be done here.&#xA;&#xA;NOTE: By default, all exceptions are treated the same. " DisplayName="ERR_HandleDocumentError" sap:VirtualizedContainerService.HintSize="1012,449.65666666666664" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -111,11 +111,11 @@
     <ui:LogMessage DisplayName="Log Message - HandleDocumentError" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[String.Format(in_Config(&quot;WarnMessage_DocumentProcessingFailure&quot;), in_PageRange, in_TargetFile, in_Exception.GetType.Name, in_Exception.Message + Environment.NewLine, in_Exception.ToString + Environment.NewLine + in_Config(&quot;logKey&quot;))]" />
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="WriteStatus - Invoke Workflow File (ConocoProject_workflows\WriteStatus.xaml)" sap:VirtualizedContainerService.HintSize="450,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ConocoProject_workflows\WriteStatus.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="inPagerange">[in_PageRange]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PageRange">[in_PageRange.ToString]</InArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="inConfig">[in_Config]</InArgument>
         <InOutArgument x:TypeArguments="x:String" x:Key="in_strOutputFilePath">[io_outputfilePath]</InOutArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[io_TransactionItem.SpecificContent("FilePath").ToString]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Status">[in_Exception.GetType.Name]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">System exception</InArgument>
         <InArgument x:TypeArguments="s:Exception" x:Key="in_ErrorMessage">[in_Exception]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>

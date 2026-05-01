@@ -98,7 +98,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         },
         {
@@ -142,7 +142,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         },
         {
@@ -164,7 +164,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         },
         {
@@ -230,7 +230,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         },
         {
@@ -252,7 +252,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         },
         {
@@ -274,7 +274,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         },
         {
@@ -296,7 +296,7 @@
             }
           ],
           "RuleSet": null,
-          "DefaultValue": "",
+          "DefaultValue": "NA",
           "DataSource": null
         }
       ]

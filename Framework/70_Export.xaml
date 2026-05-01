@@ -1,5 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="_70_Export" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="_70_Export" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr/extraction" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
+    <x:Property Name="in_PageRange" Type="InOutArgument(x:String)" />
     <x:Property Name="invar_OutputExcelPath" Type="InOutArgument(x:String)" />
     <x:Property Name="io_transactionitem" Type="InOutArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="The results of the data extraction process." Name="in_ExtractionResults" Type="InArgument(p:ExtractionResult)" />
@@ -48,10 +49,13 @@
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Numerics</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="64">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="128">
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -111,10 +115,21 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Post-extraction &amp; Data Export&#xA;&#xA;Post extraction - any logic that must be executed after data extraction and prior to the data export belongs here (eg: format the data according to an export schema)&#xA;&#xA;Data Export - output the data to make it usable by the Business users or by subsequent processes. We recommend using UiPath's DataService." DisplayName="Export" sap:VirtualizedContainerService.HintSize="758.6666666666666,788.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Post-extraction &amp; Data Export&#xA;&#xA;Post extraction - any logic that must be executed after data extraction and prior to the data export belongs here (eg: format the data according to an export schema)&#xA;&#xA;Data Export - output the data to make it usable by the Business users or by subsequent processes. We recommend using UiPath's DataService." DisplayName="Export" sap:VirtualizedContainerService.HintSize="770.6666666666666,1996" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Outputdatatable" />
+      <Variable x:TypeArguments="x:String" Name="var_MatchedSheet" />
+      <Variable x:TypeArguments="s:String[]" Name="var_VariantNamesList" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Used to store the path to the file where the extracted data will be saved." Name="outputPath" />
       <Variable x:TypeArguments="sd:DataSet" sap2010:Annotation.AnnotationText="Used to store the exported data from the ExtractionResults in the Export Extraction Results activity." Name="exportDataSet" />
     </Sequence.Variables>
@@ -124,19 +139,67 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Start Data Export" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_Config(&quot;LogMessage_DataExportStart&quot;) + &quot; &quot; + in_ExtractionResults.ResultsDocument.DocumentTypeId + &quot; (pag &quot; +  (in_ExtractionResults.ResultsDocument.Bounds.StartPage + 1).ToString + &quot;-&quot; + (in_ExtractionResults.ResultsDocument.Bounds.StartPage + in_ExtractionResults.ResultsDocument.Bounds.PageCount).ToString + &quot;)&quot; + Environment.NewLine + in_Config(&quot;logKey&quot;)]" />
-    <ui:Comment DisplayName="Comment - Example Export" sap:VirtualizedContainerService.HintSize="450,166.66666666666666" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Please note that the below example is intended for illustrative purposes only. The export to excel was just an example. Ideally you would want to use the data extracted in another process." />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="WriteData - Invoke Workflow File (ConocoProject_workflows\WriteData.xaml)" sap:VirtualizedContainerService.HintSize="450,177.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ConocoProject_workflows\WriteData.xaml">
+    <ui:LogMessage DisplayName="Log Message - Start Data Export" sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_Config(&quot;LogMessage_DataExportStart&quot;) + &quot; &quot; + in_ExtractionResults.ResultsDocument.DocumentTypeId + &quot; (pag &quot; +  (in_ExtractionResults.ResultsDocument.Bounds.StartPage + 1).ToString + &quot;-&quot; + (in_ExtractionResults.ResultsDocument.Bounds.StartPage + in_ExtractionResults.ResultsDocument.Bounds.PageCount).ToString + &quot;)&quot; + Environment.NewLine + in_Config(&quot;logKey&quot;)]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="477.3333333333333,180" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="s:String[]">[var_VariantNamesList]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="s:String[]">[in_Config("VariantNames").ToString.Split(","c)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[var_MatchedSheet]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[var_VariantNamesList.FirstOrDefault(Function(v)io_Transactionitem.SpecificContent("FilePath").ToString() .ToLower.Contains(v.Trim.ToLower))]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <p1:ExportExtractionResults sap2010:Annotation.AnnotationText="in_ExtractionResults.AsDataSet() method can also be used" DataSet="[exportDataSet]" DisplayName="Export Extraction Results - Export" ExtractionResult="[in_ExtractionResults]" sap:VirtualizedContainerService.HintSize="477.3333333333333,258.6666666666667" sap2010:WorkflowViewState.IdRef="ExportExtractionResults_1" IncludeConfidence="False" IncludeOCRConfidence="False">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </p1:ExportExtractionResults>
+    <Assign sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dt_Outputdatatable]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[exportDataSet.Tables(0)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;data is appending&quot;]" />
+    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="477.3333333333333,582.6666666666666" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="8" RetryInterval="00:00:10">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="450,375.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" AppliesTo="All" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="EXCEL" />
+            <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[dt_Outputdatatable]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="416,138.66666666666666" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="[var_MatchedSheet]" WorkbookPath="[invar_OutputExcelPath]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean" />
+      </ui:RetryScope.Condition>
+    </ui:RetryScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="477.3333333333333,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;data appended&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="WriteStatus - Invoke Workflow File (ConocoProject_workflows\WriteStatus.xaml)" sap:VirtualizedContainerService.HintSize="477.3333333333333,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ConocoProject_workflows\WriteStatus.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_strFilePath">[io_Transactionitem.SpecificContent("FilePath").ToString()]</InArgument>
-        <InArgument x:TypeArguments="p:ExtractionResult" x:Key="in_ErExtractionResults">[in_ExtractionResults]</InArgument>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_dtConfig">[in_Config]</InArgument>
-        <InOutArgument x:TypeArguments="x:String" x:Key="in_strOutputFilePath">[invar_OutputExcelPath]</InOutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="WriteStatus - Invoke Workflow File (ConocoProject_workflows\WriteStatus.xaml)" sap:VirtualizedContainerService.HintSize="450,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ConocoProject_workflows\WriteStatus.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="inPagerange" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_PageRange">[in_PageRange]</InArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="inConfig">[in_Config]</InArgument>
         <InOutArgument x:TypeArguments="x:String" x:Key="in_strOutputFilePath">[invar_OutputExcelPath]</InOutArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[io_transactionitem.SpecificContent("FilePath").ToString()]</InArgument>

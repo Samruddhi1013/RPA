@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="_10_InitializeProcess" this:_10_InitializeProcess.in_AssetsSheet="Assets" this:_10_InitializeProcess.in_ConfigFile="Data\Config.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="_10_InitializeProcess" this:_10_InitializeProcess.in_AssetsSheet="Assets" this:_10_InitializeProcess.in_ConfigFile="Data\Config.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:uasq="clr-namespace:UiPath.Activities.System.Queues;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_ExcelPath" Type="InOutArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Name of the sheet corresponding to assets in the configuration file." Name="in_AssetsSheet" Type="InArgument(x:String)" />
@@ -7,6 +7,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Used to control the amount of time between retries in the Retry Scope activity." Name="in_RetryInterval" Type="InArgument(x:TimeSpan)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property sap2010:Annotation.AnnotationText="Stores the project taxonomy against which the documents can be processed." Name="out_DocTaxonomy" Type="OutArgument(p:DocumentTaxonomy)" />
+    <x:Property Name="outqueueitem" Type="OutArgument(scg:IEnumerable(ui:QueueItem))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -49,6 +50,10 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Activities.System.Queues</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -102,20 +107,36 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow loads the Taxonomy and updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="InitializeProcess" sap:VirtualizedContainerService.HintSize="922,2914.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow loads the Taxonomy and updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="InitializeProcess" sap:VirtualizedContainerService.HintSize="800.6666666666666,3786.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - InitStarted" sap:VirtualizedContainerService.HintSize="518,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[io_Config(&quot;LogMessage_InitStarted&quot;) + Environment.NewLine + io_Config(&quot;logKey&quot;)]" />
-    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" sap2010:Annotation.AnnotationText="Although unusual, the connection to the Orchestrator might time-out. The retry mechanism is used to compensate for minor fluctuatios in network stability and other recoverable issues." ContinueOnError="False" DisplayName="Retry Scope - InitializeProcess" sap:VirtualizedContainerService.HintSize="518,2516.6666666666665" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[in_MaxAttempts]" RetryInterval="[in_RetryInterval]">
+    <ui:LogMessage DisplayName="Log Message - InitStarted" sap:VirtualizedContainerService.HintSize="522.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[io_Config(&quot;LogMessage_InitStarted&quot;) + Environment.NewLine + io_Config(&quot;logKey&quot;)]" />
+    <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" sap2010:Annotation.AnnotationText="Although unusual, the connection to the Orchestrator might time-out. The retry mechanism is used to compensate for minor fluctuatios in network stability and other recoverable issues." ContinueOnError="False" DisplayName="Retry Scope - InitializeProcess" sap:VirtualizedContainerService.HintSize="522.6666666666666,2428" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[in_MaxAttempts]" RetryInterval="[in_RetryInterval]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence sap2010:Annotation.AnnotationText="This sequence loads the Taxonomy &amp; updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="LoadAllSettings" sap:VirtualizedContainerService.HintSize="516,2248" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence sap2010:Annotation.AnnotationText="This sequence loads the Taxonomy &amp; updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="LoadAllSettings" sap:VirtualizedContainerService.HintSize="516,2159.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" sap2010:Annotation.AnnotationText="Intermediary DataTable structure used for reading from the configuration file." Name="configDT" />
               <Variable x:TypeArguments="x:Object" sap2010:Annotation.AnnotationText="Used for retrieving the assets values from Orchestrator." Name="assetValue" />
@@ -129,7 +150,7 @@
             </sap:WorkflowViewStateService.ViewState>
             <p1:LoadTaxonomy DisplayName="Load Taxonomy of Project" sap:VirtualizedContainerService.HintSize="482,140" sap2010:WorkflowViewState.IdRef="LoadTaxonomy_1" Taxonomy="[out_DocTaxonomy]" />
             <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[configDT]" DisplayName="Read range Assets" sap:VirtualizedContainerService.HintSize="482,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[in_AssetsSheet]" WorkbookPath="[in_ConfigFile]" />
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[configDT]" DisplayName="For each row - Get Assets" sap:VirtualizedContainerService.HintSize="482,1804" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[configDT]" DisplayName="For each row - Get Assets" sap:VirtualizedContainerService.HintSize="482,1794.6666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
@@ -232,7 +253,6 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEachRow>
-            <ui:Comment DisplayName="Comment - Custom Init" sap:VirtualizedContainerService.HintSize="482,79.33333333333333" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Write your custom Initialization code here" />
           </Sequence>
         </ActivityAction>
       </ui:RetryScope.ActivityBody>
@@ -245,11 +265,85 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="CreateOutputFile - Invoke Workflow File (ConocoProject_workflows\CreateOutputFile.xaml)" sap:VirtualizedContainerService.HintSize="518,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ConocoProject_workflows\CreateOutputFile.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="CreateOutputFile - Invoke Workflow File (ConocoProject_workflows\CreateOutputFile.xaml)" sap:VirtualizedContainerService.HintSize="522.6666666666666,177.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ConocoProject_workflows\CreateOutputFile.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Config">[io_Config]</InArgument>
         <InOutArgument x:TypeArguments="x:String" x:Key="out_ExcelFilePath">[out_ExcelPath]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="522.6666666666666,339.3333333333333" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Reference="{x:Null}" Skip="{x:Null}" TimeoutMS="{x:Null}" To="{x:Null}" Top="{x:Null}" DisplayName="Get Queue Items" FilterStrategy="Equals" FolderPath="[io_Config(&quot;DocumentUnderstandingQueuePath&quot;).ToString]" sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="GetQueueItems_1" PropsImportedIntoFilterBuilder="True" QueueItemStates="All" QueueName="[io_Config(&quot;DocumentUnderstandingQueueName&quot;).ToString]" Result="[outqueueitem]">
+            <ui:GetQueueItems.FilterBuilder>
+              <uasq:QueueItemFilterSettings Index="0" LogicalOperator="And">
+                <uasq:QueueItemFilterSettings.Filters>
+                  <scg:List x:TypeArguments="uasq:QueueItemFilterElement" Capacity="8">
+                    <uasq:QueueItemStatusFilterElementWithArg Criteria="Status" Operator="Equals" Value="[UiPath.Core.Activities.QueueItemStates.Successful]" />
+                    <uasq:QueueItemStatusFilterElementWithArg Criteria="Status" Operator="Equals" Value="[UiPath.Core.Activities.QueueItemStates.Failed]" />
+                    <uasq:QueueItemStatusFilterElementWithArg Criteria="Status" Operator="Equals" Value="[UiPath.Core.Activities.QueueItemStates.InProgress]" />
+                    <uasq:QueueItemStatusFilterElementWithArg Criteria="Status" Operator="Equals" Value="[UiPath.Core.Activities.QueueItemStates.Abandoned]" />
+                    <uasq:QueueItemStatusFilterElementWithArg Criteria="Status" Operator="Equals" Value="[UiPath.Core.Activities.QueueItemStates.Retried]" />
+                    <uasq:QueueItemStatusFilterElementWithArg Criteria="Status" Operator="Equals" Value="[UiPath.Core.Activities.QueueItemStates.Deleted]" />
+                  </scg:List>
+                </uasq:QueueItemFilterSettings.Filters>
+                <uasq:QueueItemFilterSettings.Groups>
+                  <scg:List x:TypeArguments="uasq:QueueItemFilterSettings" Capacity="0" />
+                </uasq:QueueItemFilterSettings.Groups>
+              </uasq:QueueItemFilterSettings>
+            </ui:GetQueueItems.FilterBuilder>
+          </ui:GetQueueItems>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="522.6666666666666,612" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="486,509.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If Condition="[outqueueitem.count=0]" sap:VirtualizedContainerService.HintSize="452,449.3333333333333" sap2010:WorkflowViewState.IdRef="If_4">
+            <If.Then>
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SendEmail - Invoke Workflow File (CommonSendEmail\SendEmail.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="CommonSendEmail\SendEmail.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="io_FilePath" />
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_SystemEx" />
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_BusinessEx" />
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_Success" />
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_Total" />
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Config">[io_Config]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_Body">[io_Config("StartmailBody").ToString().Replace("{ProcessName}", io_Config("ProcessName").ToString()).Replace("{StartTime}", Now.ToString())]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_Subject">[io_Config("startmailsubject").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_To">[io_Config("StatusMail_To").ToString]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
   </Sequence>
 </Activity>

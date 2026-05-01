@@ -145,6 +145,21 @@
           "out_varOutputExcelPath": {
             "type": "string"
           },
+          "io_SuccessCount": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "io_BussinessExceptionCount": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "io_SystemExceptionCount": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
           "in_TargetFile": {
             "type": "string",
             "description": "The file path of the target document that is going to be processed."
@@ -154,6 +169,26 @@
             "description": "Variable that checks if the Document Understanding Process is using Orchestrator Queues or not.",
             "x-default-expression": "True",
             "default": true
+          },
+          "in_Total": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "in_Success": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "in_Business": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "in_SystemEx": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
           }
         },
         "required": []
@@ -297,6 +332,21 @@
           },
           "out_varOutputExcelPath": {
             "type": "string"
+          },
+          "io_SuccessCount": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "io_BussinessExceptionCount": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "io_SystemExceptionCount": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
           }
         }
       }
